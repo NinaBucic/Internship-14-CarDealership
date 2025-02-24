@@ -1,5 +1,25 @@
+:root {
+  --empty-form-color: #626161;
+  --blue-color: #2f37c9;
+  --blue-color-hover: #2f37c9d4;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+body {
+  font-weight: 400;
+  line-height: 1.5;
+  width: 100vw;
+  min-height: 100vh;
+  overflow-x: hidden;
+
+  background-image: url("../src/assets/cars-background.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }

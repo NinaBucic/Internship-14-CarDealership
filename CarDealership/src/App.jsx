@@ -9,12 +9,7 @@ function App() {
     setCars([...cars, { id: uuidv4(), ...newCar }]);
   };
 
-  return (
-    <div>
-      <h1>Car Dealership</h1>
-      <CarForm onAddCar={handleAddCar} carCount={cars.length} />
-    </div>
-  );
+  return <CarForm onAddCar={handleAddCar} carCount={cars.length} />;
 }
 
 export default App;
