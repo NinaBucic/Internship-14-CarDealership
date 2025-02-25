@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import CarForm from "./components/CarForm";
 import CarList from "./components/CarList";
+import Filter from "./components/Filter";
 
 const initialCars = [
   {
@@ -76,15 +77,16 @@ const initialCars = [
 
 function App() {
   const [cars, setCars] = useState(initialCars);
+  const [filteredCars, setFilteredCars] = useState(initialCars);
 
   const handleAddCar = (newCar) => {
-    setCars((prevCars) =>
-      [...prevCars, { id: uuidv4(), ...newCar }].sort((a, b) => {
-        if (a.year !== b.year) return b.year - a.year;
-        if (a.brand !== b.brand) return a.brand.localeCompare(b.brand);
-        return a.model.localeCompare(b.model);
-      })
-    );
+    const updatedCars = [...cars, { id: uuidv4(), ...newCar }].sort((a, b) => {
+      if (a.year !== b.year) return b.year - a.year;
+      if (a.brand !== b.brand) return a.brand.localeCompare(b.brand);
+      return a.model.localeCompare(b.model);
+    });
+    setCars(updatedCars);
+    setFilteredCars(updatedCars);
   };
 
   const handleDeleteCar = (id) => {
@@ -93,13 +95,31 @@ function App() {
     );
     if (!confirmDelete) return;
 
-    setCars((prevCars) => prevCars.filter((car) => car.id !== id));
+    const updatedCars = cars.filter((car) => car.id !== id);
+    setCars(updatedCars);
+    setFilteredCars(updatedCars);
+  };
+
+  const handleFilter = (searchTerm) => {
+    if (!searchTerm) {
+      setFilteredCars(cars);
+      return;
+    }
+
+    const lowerCaseTerm = searchTerm.toLowerCase();
+    const filtered = cars.filter((car) => {
+      const combined = (car.brand + " " + car.model).toLowerCase();
+      return combined.includes(searchTerm.toLowerCase());
+    });
+
+    setFilteredCars(filtered);
   };
 
   return (
     <div>
       <CarForm onAddCar={handleAddCar} carCount={cars.length} />
-      <CarList cars={cars} onDeleteCar={handleDeleteCar} />
+      <Filter onFilter={handleFilter} />
+      <CarList cars={filteredCars} onDeleteCar={handleDeleteCar} />
     </div>
   );
 }

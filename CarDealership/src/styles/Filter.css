@@ -1,0 +1,30 @@
+.filter-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 5px;
+  margin-top: 50px;
+  padding: 20px;
+}
+
+.filter-container input {
+  padding: 8px;
+  width: 250px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.filter-container button {
+  padding: 8px 12px;
+  background-color: var(--blue-color);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.filter-container button:hover {
+  background-color: var(--blue-color-hover);
+}
