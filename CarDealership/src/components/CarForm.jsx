@@ -11,8 +11,6 @@ function CarForm({ onAddCar, carCount }) {
     registrationDate: "",
   });
 
-  const [error, setError] = useState("");
-
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -57,6 +55,16 @@ function CarForm({ onAddCar, carCount }) {
     return null;
   };
 
+  const formatText = (text) => {
+    return text
+      .trim()
+      .replace(/\s*-\s*/g, "-")
+      .replace(/\s+/g, " ")
+      .split(/[\s-]+/)
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+      .join("-");
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -66,7 +74,15 @@ function CarForm({ onAddCar, carCount }) {
       return;
     }
 
-    onAddCar(formData);
+    const newCar = {
+      brand: formatText(formData.brand),
+      model: formatText(formData.model),
+      type: formData.type,
+      year: parseInt(formData.year, 10),
+      registrationDate: formData.registrationDate,
+    };
+
+    onAddCar(newCar);
     toast.success("Car successfully added!");
 
     setFormData({
@@ -76,7 +92,6 @@ function CarForm({ onAddCar, carCount }) {
       year: "",
       registrationDate: "",
     });
-    setError("");
   };
 
   return (
