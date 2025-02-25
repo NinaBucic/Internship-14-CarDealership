@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import CarForm from "./components/CarForm";
 import CarList from "./components/CarList";
@@ -54,6 +54,14 @@ const initialCars = [
   },
   {
     id: uuidv4(),
+    brand: "Tesla",
+    model: "Model 3",
+    type: "Electric",
+    year: 2023,
+    registrationDate: "2026-01-01",
+  },
+  {
+    id: uuidv4(),
     brand: "Honda",
     model: "Civic",
     type: "Sedan",
@@ -80,6 +88,11 @@ function App() {
   };
 
   const handleDeleteCar = (id) => {
+    const confirmDelete = window.confirm(
+      "Are you sure you want to remove this car?"
+    );
+    if (!confirmDelete) return;
+
     setCars((prevCars) => prevCars.filter((car) => car.id !== id));
   };
 
