@@ -14,17 +14,3 @@
   border-radius: 5px;
   font-size: 16px;
 }
-
-.filter-container button {
-  padding: 8px 12px;
-  background-color: var(--blue-color);
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-.filter-container button:hover {
-  background-color: var(--blue-color-hover);
-}

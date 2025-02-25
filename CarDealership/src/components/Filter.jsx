@@ -5,11 +5,9 @@ function Filter({ onFilter }) {
   const [searchTerm, setSearchTerm] = useState("");
 
   const handleChange = (e) => {
-    setSearchTerm(e.target.value);
-  };
-
-  const handleClick = () => {
-    onFilter(searchTerm);
+    const value = e.target.value;
+    setSearchTerm(value);
+    onFilter(value);
   };
 
   return (
@@ -20,7 +18,6 @@ function Filter({ onFilter }) {
         value={searchTerm}
         onChange={handleChange}
       />
-      <button onClick={handleClick}>Filter</button>
     </div>
   );
 }
